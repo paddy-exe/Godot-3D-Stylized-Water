@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/LowPolyNatureScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Etappen/MoreOrLessNiceMaterial.tres" type="Material" id=2]
+
+[node name="Main" type="Spatial"]
+
+[node name="scene" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.8867, 7.32095 )
+
+[node name="Mesh 10" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/LowPoly Nature By Edwin3D3ds" index="9"]
+visible = false
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.90492, 7.93837, 0.814537 )
+width = 6.60774
+height = 1.97409
+depth = 9.01531
+material = ExtResource( 2 )
+
+[editable path="scene"]
