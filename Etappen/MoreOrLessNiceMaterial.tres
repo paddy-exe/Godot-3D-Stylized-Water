@@ -1,6 +1,26 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=2]
 
-[ext_resource path="res://StylizedWaterShader/ScriptWaterShader-Version2.shader" type="Shader" id=1]
+[ext_resource path="res://StylizedWaterShader/StylizedWaterShader-Version2.tres" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+seed = 2
+octaves = 9
+period = 70.0
+
+[sub_resource type="NoiseTexture" id=2]
+width = 64
+height = 64
+seamless = true
+as_normalmap = true
+noise = SubResource( 1 )
 
 [resource]
 shader = ExtResource( 1 )
+shader_param/refraction_speed = 0.2
+shader_param/refraction_scale = 1.0
+shader_param/refraction_strength = 10.0
+shader_param/shallow_water = Color( 0, 0.862745, 0.976471, 0.690196 )
+shader_param/deep_water = Color( 0, 0.415686, 1, 0.929412 )
+shader_param/beer_factor = 2.0
+shader_param/water_depth = -0.95
+shader_param/NoiseUV = SubResource( 2 )

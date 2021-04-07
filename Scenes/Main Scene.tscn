@@ -18,4 +18,7 @@ height = 1.97409
 depth = 9.01531
 material = ExtResource( 2 )
 
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( -1, 4.00517e-08, -7.77085e-08, 0, 0.888881, 0.458138, 8.74228e-08, 0.458138, -0.888881, 8.27327, 10.4048, 0.452707 )
+
 [editable path="scene"]
