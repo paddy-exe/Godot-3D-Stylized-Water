@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode specular_phong, cull_disabled;
+render_mode specular_phong;
 
 uniform float speed: hint_range(-1, 1) = 0.0;
 
@@ -8,19 +8,14 @@ uniform sampler2D noise2;
 uniform sampler2D normalmap: hint_normal;
 
 uniform vec4 color : hint_color;
-uniform vec4 deep_water: hint_color;
-
-//depth-fade var
-uniform float beer_law_factor = 2.0;
-uniform float _distance = 0.0;
-
-//foam var
 uniform vec4 edge_color: hint_color;
+
+//foam
 uniform float edge_scale = 0.25;
 uniform float near = 0.1;
 uniform float far = 100f;
 
-// wave var
+// waves
 uniform vec2 wave_strength = vec2(0.5, 0.25);
 uniform vec2 wave_frequ = vec2(12.0, 12.0);
 uniform vec2 time_factor = vec2(1.0, 2.0);
@@ -38,27 +33,6 @@ float rim(float depth) {
 	return near * far / (far + depth * (near - far));
 }
 
-float calc_depth_fade(float depth, mat4 projection_matrix, 
-						vec4 fragcoord, float beer_factor, float __distance, vec3 vertex) {
-	
-	float scene_depth = depth;
-
-	scene_depth = scene_depth * 2.0 - 1.0;
-	scene_depth = projection_matrix[3][2] / (scene_depth + projection_matrix[2][2]);
-	scene_depth = scene_depth + vertex.z; // z is negative
-	
-	// application of beers law
-	scene_depth = exp(-scene_depth * beer_factor);
-	
-	float screen_depth = fragcoord.z;
-	
-	float depth_fade = (scene_depth - screen_depth) / __distance;
-	
-	depth_fade = clamp(depth_fade, 0.0, 1.0);
-	
-	return depth_fade;
-}
-
 void fragment() {
 	float time = TIME * speed;
 	
@@ -74,17 +48,10 @@ void fragment() {
 	float z_pos = rim(FRAGCOORD.z);
 	float diff = z_depth - z_pos;
 	
-	// depth-fade
-	float z_depth_fade = calc_depth_fade(texture(DEPTH_TEXTURE, SCREEN_UV).x, PROJECTION_MATRIX, FRAGCOORD, beer_law_factor, _distance, VERTEX);
-	float z_fade = rim(FRAGCOORD.z);
-	float fade_diff = z_depth_fade - z_fade;
-	
-	vec4 gradientcolor = mix(color, deep_water, z_depth_fade);
-	
 	vec2 displacement = vec2(sum * 0.1);
 	diff += displacement.x * 70f;
 	
-	vec4 col = mix(edge_color, gradientcolor, step(edge_scale, diff));
+	vec4 col = mix(edge_color, color, step(edge_scale, diff));
 	
 	vec4 alpha = texture(SCREEN_TEXTURE, SCREEN_UV + displacement);
 	
@@ -95,7 +62,7 @@ void fragment() {
 	if (sum > 0.8) fin = 1f;
 	
 	// konvertier fin in vec3 um
-	ALBEDO = vec3(fin) + mix(alpha.rgb, col.rgb, gradientcolor.a);
+	ALBEDO = vec3(fin) + mix(alpha.rgb, col.rgb, color.a);
 	
 	NORMALMAP = texture(normalmap, uv_movement).rgb;
 	
