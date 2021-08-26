@@ -1,0 +1,173 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://Scenes/StylizedWater #1/StylizedWater #1.gdshader" type="Shader" id=1]
+[ext_resource path="res://Assets/environment/NaturePack/WoodLog.fbx" type="PackedScene" id=2]
+[ext_resource path="res://Assets/environment/NaturePack/Grass_Short.fbx" type="PackedScene" id=3]
+[ext_resource path="res://Assets/src/LowPolyNatureScene.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/environment/NaturePack/Grass.fbx" type="PackedScene" id=5]
+[ext_resource path="res://Assets/environment/NaturePack/Rock_1.fbx" type="PackedScene" id=6]
+[ext_resource path="res://CameraMoveScript/camera.gd" type="Script" id=7]
+[ext_resource path="res://CameraMoveScript/CheckHeightCamera.gd" type="Script" id=8]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+period = 80.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=2]
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 80.0
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+seed = 2
+octaves = 4
+
+[sub_resource type="NoiseTexture" id=6]
+seamless = true
+as_normalmap = true
+bump_strength = 4.0
+noise = SubResource( 5 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 1 )
+shader_param/speed = 0.004
+shader_param/color = Color( 0.054902, 0.827451, 0.929412, 0.843137 )
+shader_param/deep_water = Color( 0.109804, 0.462745, 0.878431, 0.905882 )
+shader_param/beer_law_factor = 0.025
+shader_param/_distance = -0.031
+shader_param/edge_color = Color( 1, 1, 1, 1 )
+shader_param/edge_scale = 2.242
+shader_param/near = 2.376
+shader_param/far = 300.0
+shader_param/wave_strength = Vector2( 0.005, 0.005 )
+shader_param/wave_frequ = Vector2( 14, 12 )
+shader_param/time_factor = Vector2( 1.1, 2 )
+shader_param/noise1 = SubResource( 2 )
+shader_param/noise2 = SubResource( 4 )
+shader_param/normalmap = SubResource( 6 )
+
+[sub_resource type="CubeMesh" id=8]
+material = SubResource( 7 )
+size = Vector3( 9, 2, 9 )
+subdivide_width = 5
+subdivide_height = 5
+subdivide_depth = 5
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+
+uniform float scale;
+uniform sampler2D texture_albedo:hint_albedo;
+uniform vec2 time_scale;
+
+void fragment() {
+	float v = (texture(texture_albedo, SCREEN_UV + vec2(TIME, TIME) * time_scale).r - 0.5) * scale;
+	vec2 uv = SCREEN_UV + vec2(v, v);
+	COLOR = texture(SCREEN_TEXTURE, uv) * COLOR;
+}"
+
+[sub_resource type="OpenSimplexNoise" id=10]
+
+[sub_resource type="NoiseTexture" id=11]
+seamless = true
+noise = SubResource( 10 )
+
+[sub_resource type="ShaderMaterial" id=12]
+render_priority = 88
+shader = SubResource( 9 )
+shader_param/scale = 0.106
+shader_param/time_scale = Vector2( 0.11, 0.11 )
+shader_param/texture_albedo = SubResource( 11 )
+
+[node name="Main" type="Spatial"]
+script = ExtResource( 8 )
+
+[node name="scene" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.8867, 7.32095 )
+
+[node name="Mesh 10" parent="scene/RootNode gltf orientation matrix/RootNode model correction matrix/LowPoly Nature By Edwin3D3ds" index="9"]
+visible = false
+
+[node name="WaterPlane" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.39054, 7.90484, 0.404371 )
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.0452923, -0.513197, 0.857075, 0.0270822, 0.858271, 0.512482, -0.998607, 0, 0.0527716, 11.5345, 12.3511, 0 )
+
+[node name="RayCast" type="RayCast" parent="DirectionalLight"]
+transform = Transform( 0.997216, 0.0527716, -0.0526806, -0.0527715, 0.000331581, -0.998607, -0.0526806, 0.998607, 0.0031154, -5.96046e-08, 9.53674e-07, 9.53674e-07 )
+enabled = true
+collide_with_areas = true
+
+[node name="PondEnviron" type="Node" parent="."]
+
+[node name="Grass" parent="PondEnviron" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.91978, 8.19139, 0 )
+
+[node name="Grass2" parent="PondEnviron" instance=ExtResource( 5 )]
+transform = Transform( 0.626685, 0, 0.779272, 0, 1, 0, -0.779272, 0, 0.626685, 9.91978, 8.19139, -0.428663 )
+
+[node name="Grass_Short" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( 0.626685, 0, 0.779272, 0, 1, 0, -0.779272, 0, 0.626685, 7.82293, 7.57824, -0.240298 )
+
+[node name="Grass_Short4" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.501315, 0, 0.865265, 0, 1, 0, -0.865265, 0, -0.501315, 8.26558, 7.57824, 0.243606 )
+
+[node name="Grass_Short3" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.424926, 0, 0.905228, 0, 1, 0, -0.905228, 0, -0.424926, 8.25702, 7.57824, -0.240298 )
+
+[node name="Grass_Short2" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.102636, 0, 0.994719, 0, 1, 0, -0.994719, 0, -0.102636, 7.82293, 7.57824, 0.143345 )
+
+[node name="Grass_Short5" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.189438, 0, 0.981893, 0, 1, 0, -0.981893, 0, -0.189438, 7.16197, 7.57824, 0.768547 )
+
+[node name="Grass_Short6" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.984236, 0, 0.176861, 0, 1, 0, -0.176861, 0, -0.984236, 7.81732, 7.57824, 0.743639 )
+
+[node name="Grass_Short7" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.965345, 0, 0.260976, 0, 1, 0, -0.260976, 0, -0.965345, 7.44258, 7.57824, 0.437352 )
+
+[node name="Grass_Short8" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.825281, 0, 0.564722, 0, 1, 0, -0.564722, 0, -0.825281, 7.45467, 7.57824, 1.01655 )
+
+[node name="Grass_Short9" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.189438, 0, 0.981893, 0, 1, 0, -0.981893, 0, -0.189438, 7.86954, 7.57824, 1.10474 )
+
+[node name="Grass_Short10" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.984236, 0, 0.176861, 0, 1, 0, -0.176861, 0, -0.984236, 8.52489, 7.57824, 1.07984 )
+
+[node name="Grass_Short11" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.965345, 0, 0.260976, 0, 1, 0, -0.260976, 0, -0.965345, 8.15015, 7.57824, 0.773549 )
+
+[node name="Grass_Short12" parent="PondEnviron" instance=ExtResource( 3 )]
+transform = Transform( -0.825281, 0, 0.564722, 0, 1, 0, -0.564722, 0, -0.825281, 8.16224, 7.57824, 1.35275 )
+
+[node name="Rock_1" parent="PondEnviron" instance=ExtResource( 6 )]
+transform = Transform( 0.889305, -0.457315, 0, 0.457315, 0.889305, 0, 0, 0, 1, 10.3383, 8.3889, 1.82479 )
+
+[node name="WoodLog" parent="PondEnviron" instance=ExtResource( 2 )]
+transform = Transform( 0.607868, 0.547039, 0.575539, -0.0114517, 0.73079, -0.682507, -0.793956, 0.408283, 0.450488, 5.39716, 8.57168, -0.672244 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.19936, 10.5587, 4.11001 )
+script = ExtResource( 7 )
+
+[node name="UnderwaterEffect" type="ColorRect" parent="."]
+material = SubResource( 12 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.219608, 0.560784, 0.992157, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[editable path="scene"]

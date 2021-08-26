@@ -1,0 +1,19 @@
+[gd_resource type="SpatialMaterial" load_steps=5 format=2]
+
+[ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_rough_1k.jpg" type="Texture" id=1]
+[ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_diff_1k.jpg" type="Texture" id=2]
+[ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_rough_ao_1k.jpg" type="Texture" id=3]
+[ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_nor_1k.jpg" type="Texture" id=4]
+
+[resource]
+albedo_texture = ExtResource( 2 )
+roughness_texture = ExtResource( 1 )
+roughness_texture_channel = 3
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 4 )
+ao_enabled = true
+ao_light_affect = 0.0
+ao_texture = ExtResource( 3 )
+ao_on_uv2 = false
+ao_texture_channel = 0

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Assets/Kenney Tex Materials/Checked_Black_Prototype.tres" type="Material" id=1]
+
+[node name="CSGCombiner" type="CSGCombiner"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+width = 8.0
+height = 3.0
+depth = 8.0
+material = ExtResource( 1 )
+
+[node name="CSGSphere" type="CSGSphere" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+operation = 2
+radius = 3.0
+radial_segments = 24
+material = ExtResource( 1 )
