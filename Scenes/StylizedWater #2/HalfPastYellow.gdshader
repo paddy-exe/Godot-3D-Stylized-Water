@@ -26,5 +26,13 @@ void fragment() {
 	float absorption_val = 1.0 - exp2(-absorption_strength * depth);
 	vec3 subtractive_color = absorption_color * absorption_val;
 	
-	ALBEDO = subtractive_color;
+	//ALBEDO = subtractive_color;
+	
+	vec3 absorbed_color = screen_tex.rgb - subtractive_color;
+	
+	ALBEDO = absorbed_color + surface_color.rgb;
+	ALPHA = surface_color.a;
 }
+
+
+
