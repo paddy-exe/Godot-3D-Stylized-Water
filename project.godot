@@ -8,27 +8,20 @@
 
 config_version=4
 
+_global_script_classes=[  ]
+_global_script_class_icons={
+
+}
+
 [application]
 
 config/name="3D Stylized Water"
-run/main_scene="res://Scenes/TestScene/TestScene.tscn"
 config/icon="res://icon.png"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
-
-[global]
-
-shadow=false
+enabled=PoolStringArray( "goutte.camera.trackball" )
 
 [rendering]
 
-quality/shadow_atlas/cubemap_size=1024
-quality/shadows/filter_mode=2
-quality/filters/anisotropic_filter_level=8
-quality/subsurface_scattering/quality=2
-quality/subsurface_scattering/follow_surface=true
-quality/voxel_cone_tracing/high_quality=true
-quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"

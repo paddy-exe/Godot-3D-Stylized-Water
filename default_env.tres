@@ -6,8 +6,3 @@
 background_mode = 2
 background_sky = SubResource( 1 )
 ambient_light_color = Color( 0.823529, 0.823529, 0.811765, 1 )
-ssao_intensity = 9.49
-ssao_radius2 = 10.61
-ssao_intensity2 = 23.63
-ssao_light_affect = 0.06
-ssao_color = Color( 0.603922, 0.603922, 0.603922, 1 )

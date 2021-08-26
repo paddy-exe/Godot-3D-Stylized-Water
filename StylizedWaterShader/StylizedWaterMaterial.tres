@@ -1,0 +1,50 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=2]
+
+[ext_resource path="res://StylizedWaterShader/StylizedWaterShader.shader" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+octaves = 2
+period = 80.0
+lacunarity = 4.0
+
+[sub_resource type="NoiseTexture" id=2]
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+octaves = 2
+period = 80.0
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="OpenSimplexNoise" id=5]
+seed = 2
+octaves = 4
+
+[sub_resource type="NoiseTexture" id=6]
+width = 64
+height = 64
+seamless = true
+as_normalmap = true
+bump_strength = 4.0
+noise = SubResource( 5 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/speed = 0.021
+shader_param/color = Color( 0.0352941, 0.658824, 0.929412, 0.635294 )
+shader_param/deep_water = Color( 0.14902, 0.329412, 0.501961, 1 )
+shader_param/beer_law_factor = 0.016
+shader_param/_distance = -0.026
+shader_param/edge_color = Color( 1, 1, 1, 1 )
+shader_param/edge_scale = 1.252
+shader_param/near = 2.588
+shader_param/far = 300.0
+shader_param/wave_strength = Vector2( 0.015, 0.015 )
+shader_param/wave_frequ = Vector2( 14, 14 )
+shader_param/time_factor = Vector2( 1.1, 2 )
+shader_param/noise1 = SubResource( 2 )
+shader_param/noise2 = SubResource( 4 )
+shader_param/normalmap = SubResource( 6 )
