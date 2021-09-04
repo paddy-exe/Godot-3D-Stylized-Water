@@ -1,11 +1,9 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=40 format=2]
 
 [ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_material.tres" type="Material" id=1]
 [ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_rough_ao_1k.jpg" type="Texture" id=2]
-[ext_resource path="res://OtherShaders/NEWStylizedWater.tres" type="Material" id=3]
 [ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_diff_1k.jpg" type="Texture" id=4]
 [ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_nor_1k.jpg" type="Texture" id=5]
-[ext_resource path="res://StylizedWaterShader/ReworkedWaterShader/ReworkedV1.tres" type="Material" id=6]
 [ext_resource path="res://Assets/environment/Textures/cobblestone_floor_04_1k_jpg/cobblestone_floor_04_rough_1k.jpg" type="Texture" id=8]
 [ext_resource path="res://Scenes/TestScene/Pond2.gdshader" type="Shader" id=9]
 [ext_resource path="res://Scenes/TestScene/Pond3.gdshader" type="Shader" id=10]
@@ -90,7 +88,6 @@ subdivide_width = 5
 subdivide_depth = 5
 
 [sub_resource type="CubeMesh" id=11]
-material = ExtResource( 3 )
 size = Vector3( 3, 1, 3 )
 
 [sub_resource type="CubeMesh" id=12]
@@ -214,24 +211,17 @@ material = SubResource( 28 )
 size = Vector3( 7, 1, 7 )
 
 [sub_resource type="PlaneMesh" id=30]
-material = ExtResource( 3 )
 size = Vector2( 3, 3 )
 subdivide_width = 5
 subdivide_depth = 5
 
-[sub_resource type="CubeMesh" id=31]
-material = ExtResource( 6 )
-size = Vector3( 11.5, 1.5, 10.5 )
-
-[sub_resource type="CubeMesh" id=32]
-
-[sub_resource type="StreamTexture" id=33]
+[sub_resource type="StreamTexture" id=31]
 flags = 23
 load_path = "res://.import/texture_09.png-dac795ac5ff834b919f66639821ac170.s3tc.stex"
 
-[sub_resource type="SpatialMaterial" id=34]
+[sub_resource type="SpatialMaterial" id=32]
 flags_world_triplanar = true
-albedo_texture = SubResource( 33 )
+albedo_texture = SubResource( 31 )
 uv1_triplanar = true
 
 [node name="Test" type="Spatial"]
@@ -413,30 +403,20 @@ depth = 0.25
 [node name="Pond5" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39.4687, 0, 0 )
 
-[node name="WaterPlane" type="MeshInstance" parent="Pond5"]
-transform = Transform( 1.09757, 0, 0, 0, 1.08578, 0, 0, 0, 1.04788, 4.54538, 0.0278404, -0.106674 )
-mesh = SubResource( 31 )
-material/0 = null
-
-[node name="MeshInstance6" type="MeshInstance" parent="Pond5"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.85852, 1, 1 )
-mesh = SubResource( 32 )
-material/0 = null
-
 [node name="CSGCombiner" type="CSGCombiner" parent="Pond5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5798, 0, 0 )
 
 [node name="CSGBox" type="CSGBox" parent="Pond5/CSGCombiner"]
 width = 14.0
 depth = 12.0
-material = SubResource( 34 )
+material = SubResource( 32 )
 
 [node name="CSGBox2" type="CSGBox" parent="Pond5/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.104999, 0 )
 operation = 2
 width = 12.0
 depth = 10.0
-material = SubResource( 34 )
+material = SubResource( 32 )
 
 [node name="SpotLight" type="SpotLight" parent="Pond5"]
 transform = Transform( 0.994665, 4.50914e-09, -0.103157, 0.102866, 0.0751353, 0.991854, 0.00775075, -0.997173, 0.0747345, 3.12473, 4.66141, 0 )

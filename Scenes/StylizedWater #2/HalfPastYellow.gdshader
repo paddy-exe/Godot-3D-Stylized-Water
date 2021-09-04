@@ -5,6 +5,8 @@ uniform vec4 surface_color : hint_color;
 uniform float beer_factor = 0.1;
 uniform float absorption_strength = 0.1;
 
+
+
 void fragment() {
 	vec4 screen_tex = texture(SCREEN_TEXTURE, SCREEN_UV);
 	
@@ -32,6 +34,9 @@ void fragment() {
 	
 	ALBEDO = absorbed_color + surface_color.rgb;
 	ALPHA = surface_color.a;
+	
+	
+	
 }
 
 
