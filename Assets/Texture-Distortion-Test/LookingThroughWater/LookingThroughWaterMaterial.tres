@@ -1,0 +1,27 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Texture-Distortion-Test/LookingThroughWater/LookingThroughWater.gdshader" type="Shader" id=1]
+[ext_resource path="res://Assets/Texture-Distortion-Test/flow-speed-noise.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Texture-Distortion-Test/water-derivative-height.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Texture-Distortion-Test/water.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Texture-Distortion-Test/water-normal.png" type="Texture" id=5]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/_Metallic = 0.604
+shader_param/_Smoothness = 0.0
+shader_param/_Color = Color( 0.247059, 0.662745, 0.843137, 1 )
+shader_param/_UJump = 0.0
+shader_param/_VJump = 0.0
+shader_param/_Tiling = 3.0
+shader_param/_Speed = 0.5
+shader_param/_Flow_Strength = 0.1
+shader_param/_Flow_Offset = 0.0
+shader_param/_HeightScaleModulated = 0.75
+shader_param/uv1_scale = Vector3( 1, 1, 1 )
+shader_param/alpha = 1.0
+shader_param/beer_factor = 0.0
+shader_param/texture_albedo = ExtResource( 4 )
+shader_param/flowmap = ExtResource( 2 )
+shader_param/_DerivHeightMap = ExtResource( 3 )
+shader_param/_NormalMap = ExtResource( 5 )

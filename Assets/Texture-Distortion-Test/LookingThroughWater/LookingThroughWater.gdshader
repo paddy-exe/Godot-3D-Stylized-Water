@@ -1,4 +1,10 @@
 shader_type spatial;
+render_mode depth_draw_alpha_prepass;
+
+// standard stuff -> can be deleted later
+uniform float _Metallic : hint_range(0.0, 1.0) = 0.0;
+uniform float _Smoothness : hint_range(0.0, 1.0) = 0.0;
+
 
 uniform sampler2D texture_albedo : hint_albedo;
 uniform vec4 _Color : hint_color = vec4(1.0);
@@ -18,6 +24,23 @@ uniform sampler2D _DerivHeightMap : hint_black;
 uniform sampler2D _NormalMap : hint_normal;
 
 uniform vec3 uv1_scale;
+
+// alpha
+uniform float alpha : hint_range(0.0, 1.0) = 0.0;
+uniform float beer_factor : hint_range(-5.0, 5.0) = 0.0;
+
+
+// finding the depth
+vec3 ColorBelowWater(sampler2D depth_tex, vec2 screen_uv, mat4 proj_matrix, vec3 vertex, float beer_fac) {
+	// depth calculation
+	float depth = texture(depth_tex, screen_uv).r;
+	depth = depth * 2.0 - 1.0;
+	depth = proj_matrix[3][2] / (depth + proj_matrix[2][2]);
+	depth = depth + vertex.z;
+	depth = exp(-depth * beer_fac);
+	depth = 1.0 - depth;
+	return vec3(0.0);
+}
 
 
 vec3 UnpackDerivativeHeight (vec4 textureData) {
@@ -75,4 +98,10 @@ void fragment() {
 	
 	
 	ALBEDO = c.rgb;
+	
+	// refraction
+	ALBEDO = ColorBelowWater(DEPTH_TEXTURE, SCREEN_UV, PROJECTION_MATRIX, VERTEX, beer_factor);
+	ALPHA = alpha;
+	METALLIC = _Metallic;
+	ROUGHNESS = _Smoothness;
 }

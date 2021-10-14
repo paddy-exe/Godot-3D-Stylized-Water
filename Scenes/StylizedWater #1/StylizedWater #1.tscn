@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scenes/StylizedWater #1/StylizedWater #1.gdshader" type="Shader" id=1]
 [ext_resource path="res://Assets/environment/NaturePack/WoodLog.fbx" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/environment/NaturePack/Rock_1.fbx" type="PackedScene" id=6]
 [ext_resource path="res://CameraMoveScript/camera.gd" type="Script" id=7]
 [ext_resource path="res://CameraMoveScript/CheckHeightCamera.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/WorldEnvironment.tscn" type="PackedScene" id=9]
 
 [sub_resource type="OpenSimplexNoise" id=1]
 period = 80.0
@@ -85,6 +86,25 @@ shader_param/scale = 0.106
 shader_param/time_scale = Vector2( 0.11, 0.11 )
 shader_param/texture_albedo = SubResource( 11 )
 
+[sub_resource type="ProceduralSky" id=13]
+sky_top_color = Color( 0.0627451, 0.384314, 0.552941, 1 )
+sky_horizon_color = Color( 0.4, 0.556863, 0.678431, 1 )
+ground_bottom_color = Color( 0.0627451, 0.384314, 0.552941, 1 )
+ground_horizon_color = Color( 0.4, 0.556863, 0.678431, 1 )
+
+[sub_resource type="Environment" id=14]
+background_mode = 2
+background_sky = SubResource( 13 )
+ambient_light_color = Color( 0.533333, 0.533333, 0.533333, 1 )
+ambient_light_energy = 2.07
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 3
+tonemap_exposure = 0.86
+tonemap_white = 0.73
+glow_enabled = true
+glow_strength = 0.62
+glow_bloom = 0.62
+
 [node name="Main" type="Spatial"]
 script = ExtResource( 8 )
 
@@ -101,6 +121,7 @@ material/0 = null
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.0452923, -0.513197, 0.857075, 0.0270822, 0.858271, 0.512482, -0.998607, 0, 0.0527716, 11.5345, 12.3511, 0 )
+light_color = Color( 0.882353, 0.882353, 0.882353, 1 )
 
 [node name="RayCast" type="RayCast" parent="DirectionalLight"]
 transform = Transform( 0.997216, 0.0527716, -0.0526806, -0.0527715, 0.000331581, -0.998607, -0.0526806, 0.998607, 0.0031154, -5.96046e-08, 9.53674e-07, 9.53674e-07 )
@@ -169,5 +190,8 @@ color = Color( 0.219608, 0.560784, 0.992157, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 9 )]
+environment = SubResource( 14 )
 
 [editable path="scene"]

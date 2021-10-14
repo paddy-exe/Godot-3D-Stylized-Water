@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+sky_top_color = Color( 0.0627451, 0.384314, 0.552941, 1 )
+sky_horizon_color = Color( 0.4, 0.556863, 0.678431, 1 )
+ground_bottom_color = Color( 0.0627451, 0.384314, 0.552941, 1 )
+ground_horizon_color = Color( 0.4, 0.556863, 0.678431, 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+ambient_light_color = Color( 0.533333, 0.533333, 0.533333, 1 )
+ambient_light_energy = 2.07
+ambient_light_sky_contribution = 0.3
+tonemap_mode = 3
+tonemap_exposure = 1.67
+tonemap_white = 2.34
+glow_enabled = true
+glow_strength = 0.62
+glow_bloom = 0.62
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 2 )

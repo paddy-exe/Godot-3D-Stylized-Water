@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Texture-Distortion-Test/LookingThroughWater/LookingThroughWater.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/Kenney Tex Materials/Red_Prototype.tres" type="Material" id=2]
+[ext_resource path="res://Assets/Kenney Tex Materials/Green_Prototype.tres" type="Material" id=3]
+[ext_resource path="res://Assets/Kenney Tex Materials/Checked_Black_Prototype.tres" type="Material" id=4]
+
+[sub_resource type="CubeMesh" id=1]
+material = ExtResource( 3 )
+size = Vector3( 1, 1, 2 )
+
+[sub_resource type="SphereMesh" id=2]
+material = ExtResource( 2 )
+radius = 0.5
+height = 1.0
+
+[sub_resource type="CapsuleMesh" id=3]
+material = ExtResource( 2 )
+radius = 0.5
+
+[sub_resource type="CapsuleMesh" id=4]
+material = ExtResource( 3 )
+radius = 0.5
+
+[node name="LookingThoughWaterTest" type="Spatial"]
+
+[node name="CSGCombiner" type="CSGCombiner" parent="."]
+
+[node name="MeshInstance" type="CSGBox" parent="CSGCombiner"]
+width = 6.0
+height = 8.0
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="MeshInstance2" type="CSGBox" parent="CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+operation = 2
+width = 5.0
+height = 7.0
+depth = 5.0
+material = ExtResource( 4 )
+
+[node name="Spatial" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.60888, 0 )
+cast_shadow = 0
+
+[node name="Decorations" type="Node" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, -2.01099, 1.85121, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 2.0342, 1.85121, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 0.0116711, 2.72981, -2.42443 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance4" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 0.0116711, 2.72981, 2.01039 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="MeshInstance5" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 1.07581, 2.72981, -1.95272 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance6" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, -2.23463, 1.99931, 1.1869 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance7" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 1.48579, 3.38872, 1.1869 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance8" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.442098, -0.302054, -0.844578, 0.14008, 0.953291, -0.267608, 0.885961, 0, 0.46376, 1.48579, -0.632305, 1.1869 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="MeshInstance9" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.989889, -0.128747, 0.0595317, 0.14008, 0.953291, -0.267608, -0.0222975, 0.273241, 0.961687, -0.409912, 0.496497, -1.84028 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="MeshInstance10" type="MeshInstance" parent="Decorations"]
+transform = Transform( 0.989889, -0.128747, 0.0595317, 0.14008, 0.953291, -0.267608, -0.0222975, 0.273241, 0.961687, -1.22858, 0.496497, 1.82316 )
+mesh = SubResource( 4 )
+material/0 = null
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="SpotLight" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.80681, 0.304957 )
+light_energy = 11.6
+spot_range = 3.3
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 0.61423, 0.789127, 0, -0.789127, 0.61423, 0, 8.89957, 4.98061 )
+light_energy = 1.98

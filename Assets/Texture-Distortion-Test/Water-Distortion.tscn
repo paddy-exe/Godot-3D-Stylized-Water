@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Assets/Texture-Distortion-Test/water.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Texture-Distortion-Test/tex-distort.gdshader" type="Shader" id=2]
-[ext_resource path="res://Assets/Texture-Distortion-Test/flowmapA.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Texture-Distortion-Test/flow-speed-noise.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Texture-Distortion-Test/water-normal.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Texture-Distortion-Test/water-derivative-height.png" type="Texture" id=5]
 
@@ -11,13 +11,14 @@ size = Vector2( 4, 4 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 2 )
-shader_param/_Color = Color( 1, 1, 1, 1 )
+shader_param/_Color = Color( 0.247059, 0.662745, 0.843137, 1 )
 shader_param/_UJump = 0.0
 shader_param/_VJump = 0.0
 shader_param/_Tiling = 3.0
 shader_param/_Speed = 0.5
 shader_param/_Flow_Strength = 0.1
 shader_param/_Flow_Offset = 0.0
+shader_param/_HeightScaleModulated = 0.9
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
 shader_param/texture_albedo = ExtResource( 1 )
 shader_param/flowmap = ExtResource( 3 )
