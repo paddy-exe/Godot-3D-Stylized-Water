@@ -40,7 +40,7 @@ height = 7.0
 depth = 5.0
 material = ExtResource( 4 )
 
-[node name="Spatial" parent="." instance=ExtResource( 1 )]
+[node name="WaterSurface" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.60888, 0 )
 cast_shadow = 0
 
@@ -99,10 +99,10 @@ material/0 = null
 [node name="Lights" type="Node" parent="."]
 
 [node name="SpotLight" type="SpotLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.80681, 0.304957 )
-light_energy = 11.6
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 4.80681, -0.908056 )
+light_energy = 300.0
 spot_range = 3.3
 
 [node name="DirectionalLight" type="DirectionalLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 0.61423, 0.789127, 0, -0.789127, 0.61423, 0, 8.89957, 4.98061 )
-light_energy = 1.98
+light_energy = 25.0

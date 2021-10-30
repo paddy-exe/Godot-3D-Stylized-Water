@@ -10,8 +10,8 @@ uniform float _Speed = 1.0;
 uniform float _Flow_Strength = 1.0;
 uniform float _Flow_Offset : hint_range(-0.5, 0.5) = 0.0;
 
-const float _HeightScale = 1.0;
-uniform float _HeightScaleModulated = 0.75;
+uniform float _HeightScale_Constant = 0.25;
+uniform float _HeightScaleModulated = 0.9;
 uniform sampler2D _DerivHeightMap : hint_black;
 
 //Normalmap
@@ -66,7 +66,7 @@ void fragment() {
 	
 	vec4 c = (texA + texB) * _Color;
 	
-	float finalHeightScale = flow.z * _HeightScaleModulated + _HeightScale;
+	float finalHeightScale = flow.z * _HeightScaleModulated + _HeightScale_Constant;
 	
 	vec3 dhA = UnpackDerivativeHeight(texture(_DerivHeightMap, uvwA.xy)) * (uvwA.z * finalHeightScale);
 	vec3 dhB = UnpackDerivativeHeight(texture(_DerivHeightMap, uvwB.xy)) * (uvwB.z * finalHeightScale);

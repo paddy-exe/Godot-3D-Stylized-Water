@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Texture-Distortion-Test/LookingThroughWater/LookingThroughWater.gdshader" type="Shader" id=1]
 [ext_resource path="res://Assets/Texture-Distortion-Test/flow-speed-noise.png" type="Texture" id=2]
@@ -6,7 +6,25 @@
 [ext_resource path="res://Assets/Texture-Distortion-Test/water.png" type="Texture" id=4]
 [ext_resource path="res://Assets/Texture-Distortion-Test/water-normal.png" type="Texture" id=5]
 
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/_Metallic = 0.0
+shader_param/_Smoothness = 0.0
+shader_param/_Color = Color( 1, 1, 1, 1 )
+shader_param/_UJump = 0.25
+shader_param/_VJump = 0.25
+shader_param/_Tiling = 1.0
+shader_param/_Speed = 1.0
+shader_param/_Flow_Strength = 1.0
+shader_param/_Flow_Offset = 0.0
+shader_param/_HeightScaleModulated = 0.75
+shader_param/uv1_scale = null
+shader_param/alpha = 0.0
+shader_param/beer_factor = 0.0
+shader_param/depth_difference = 10.0
+
 [resource]
+next_pass = SubResource( 1 )
 shader = ExtResource( 1 )
 shader_param/_Metallic = 0.604
 shader_param/_Smoothness = 0.0
@@ -19,8 +37,9 @@ shader_param/_Flow_Strength = 0.1
 shader_param/_Flow_Offset = 0.0
 shader_param/_HeightScaleModulated = 0.75
 shader_param/uv1_scale = Vector3( 1, 1, 1 )
-shader_param/alpha = 1.0
+shader_param/alpha = 0.988
 shader_param/beer_factor = 0.0
+shader_param/depth_difference = 10.0
 shader_param/texture_albedo = ExtResource( 4 )
 shader_param/flowmap = ExtResource( 2 )
 shader_param/_DerivHeightMap = ExtResource( 3 )

@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode depth_draw_alpha_prepass;
+render_mode depth_draw_alpha_prepass, cull_disabled;
 
 // standard stuff -> can be deleted later
 uniform float _Metallic : hint_range(0.0, 1.0) = 0.0;
@@ -29,6 +29,9 @@ uniform vec3 uv1_scale;
 uniform float alpha : hint_range(0.0, 1.0) = 0.0;
 uniform float beer_factor : hint_range(-5.0, 5.0) = 0.0;
 
+// depth
+uniform float depth_difference : hint_range(0.0, 20.0) = 10.0;
+
 
 // finding the depth
 vec3 ColorBelowWater(sampler2D depth_tex, vec2 screen_uv, mat4 proj_matrix, vec3 vertex, float beer_fac) {
@@ -39,7 +42,8 @@ vec3 ColorBelowWater(sampler2D depth_tex, vec2 screen_uv, mat4 proj_matrix, vec3
 	depth = depth + vertex.z;
 	depth = exp(-depth * beer_fac);
 	depth = 1.0 - depth;
-	return vec3(0.0);
+	depth = depth / depth_difference;
+	return vec3(depth);
 }
 
 
