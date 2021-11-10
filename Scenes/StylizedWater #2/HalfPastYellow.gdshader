@@ -12,10 +12,6 @@ void fragment() {
 	
 	vec3 underwater_color = screen_tex.rgb * surface_color.rgb;
 	
-	//ALBEDO = surface_color.rgb;
-	
-	//ALBEDO = underwater_color;
-	
 	// depth calculation
 	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
 	depth = depth * 2.0 - 1.0;
@@ -28,9 +24,11 @@ void fragment() {
 	float absorption_val = 1.0 - exp2(-absorption_strength * depth);
 	vec3 subtractive_color = absorption_color * absorption_val;
 	
-	//ALBEDO = subtractive_color;
-	
 	vec3 absorbed_color = screen_tex.rgb - subtractive_color;
+	
+	
+	
+	
 	
 	ALBEDO = absorbed_color + surface_color.rgb;
 	ALPHA = surface_color.a;

@@ -29,7 +29,9 @@ light=false
 
 [rendering]
 
-quality/shadow_atlas/cubemap_size=1024
+quality/directional_shadow/size=8192
+quality/shadow_atlas/size=8192
+quality/shadow_atlas/cubemap_size=2048
 quality/shadows/filter_mode=2
 quality/filters/anisotropic_filter_level=8
 quality/subsurface_scattering/quality=2
