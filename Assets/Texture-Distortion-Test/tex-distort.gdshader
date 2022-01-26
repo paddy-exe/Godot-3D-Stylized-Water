@@ -74,5 +74,5 @@ void fragment() {
 	NORMAL = normalize(vec3(-(dhA.xy + dhB.xy), 1.0));
 	
 	
-	ALBEDO = c.rgb;
+	//ALBEDO = c.rgb;
 }

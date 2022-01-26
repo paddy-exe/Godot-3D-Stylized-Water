@@ -18,6 +18,11 @@ config/name="3D Stylized Water"
 run/main_scene="res://Scenes/StylizedWater #2/HalfPastYellow.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/unused_class_variable=true
+
 [editor_plugins]
 
 enabled=PoolStringArray(  )
