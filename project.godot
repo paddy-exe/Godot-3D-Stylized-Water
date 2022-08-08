@@ -34,6 +34,7 @@ light=false
 
 [rendering]
 
+quality/filters/sharpen_intensity=0.5
 quality/directional_shadow/size=8192
 quality/shadow_atlas/size=8192
 quality/shadow_atlas/cubemap_size=2048
@@ -43,4 +44,5 @@ quality/subsurface_scattering/quality=2
 quality/subsurface_scattering/follow_surface=true
 quality/voxel_cone_tracing/high_quality=true
 quality/filters/msaa=3
+quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"
