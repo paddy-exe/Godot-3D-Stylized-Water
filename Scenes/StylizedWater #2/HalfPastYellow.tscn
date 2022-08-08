@@ -36,10 +36,8 @@ material/0 = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.977146, 0 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../..")
-material/0 = null
 
 [node name="Ball_2" type="MeshInstance" parent="MeshDecoration"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.977146, -1.38215 )
 mesh = SubResource( 5 )
 skeleton = NodePath("../..")
-material/0 = null

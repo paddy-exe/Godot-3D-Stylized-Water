@@ -58,10 +58,10 @@ void fragment() {
 	// depth calculation
 	float depth = texture(DEPTH_TEXTURE, SCREEN_UV).r;
 	depth = depth * 2.0 - 1.0;
-	depth = PROJECTION_MATRIX[3][2] / (depth + PROJECTION_MATRIX[2][2]);
-	depth = depth + VERTEX.z;
-	depth = exp(-depth * beer_factor);
-	depth = 1.0 - depth;
+	vec3 ndc = vec3(SCREEN_UV, depth) * 2.0 -1.0;
+	vec4 view = INV_PROJECTION_MATRIX * vec4(ndc, 1.0);
+	view.xyz /= view.w;
+	depth = -view.z;
 	
 	vec3 absorption_color = vec3(1.0, 1.0, 1.0) - surface_color.rgb;
 	float absorption_val = 1.0 - exp2(-absorption_strength * depth);

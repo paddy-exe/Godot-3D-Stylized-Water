@@ -7,9 +7,9 @@
 
 [resource]
 shader = ExtResource( 4 )
-shader_param/surface_color = Color( 0.101961, 0.65098, 0.796078, 0.435294 )
-shader_param/beer_factor = 2.286
-shader_param/absorption_strength = 0.611
+shader_param/surface_color = Color( 0.317647, 0.705882, 0.807843, 1 )
+shader_param/beer_factor = 2.034
+shader_param/absorption_strength = 0.509
 shader_param/_UJump = 0.15
 shader_param/_VJump = 0.13
 shader_param/_Tiling = 2.0
